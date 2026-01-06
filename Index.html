@@ -1,141 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Life Simulation</title>
-<style>
-    body {
-        background: #0e0e11;
-        color: #e5e5e5;
-        font-family: monospace;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-    }
-
-    .sim {
-        width: 380px;
-        padding: 20px;
-        background: #16161d;
-        border-radius: 10px;
-        box-shadow: 0 0 40px rgba(0,0,0,0.6);
-    }
-
-    h2 {
-        margin-top: 0;
-        text-align: center;
-        font-weight: normal;
-    }
-
-    .bar {
-        height: 12px;
-        background: #333;
-        border-radius: 6px;
-        overflow: hidden;
-        margin-bottom: 10px;
-    }
-
-    .fill {
-        height: 100%;
-        transition: width 0.3s;
-    }
-
-    .energy { background: #7dd3fc; }
-    .noise { background: #f87171; }
-
-    button {
-        width: 100%;
-        margin-top: 8px;
-        padding: 10px;
-        background: #222;
-        border: none;
-        color: #fff;
-        cursor: pointer;
-        border-radius: 6px;
-    }
-
-    button:hover {
-        background: #333;
-    }
-
-    .log {
-        margin-top: 12px;
-        font-size: 13px;
-        height: 80px;
-        overflow-y: auto;
-        color: #aaa;
-    }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Billie Eilish - i love you</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="bg-container">
+        <div class="bg-image"></div>
+        <div class="bg-blur"></div>
+    </div>
 
-<div class="sim">
-    <h2>Life (Current State)</h2>
+    <div id="overlay">
+        <button id="startBtn">Trust me</button>
+    </div>
 
-    Energy
-    <div class="bar"><div id="energyBar" class="fill energy"></div></div>
+    <div id="lyrics-viewport" class="hidden">
+        <div id="lyrics-wrapper"></div>
+    </div>
 
-    Noise
-    <div class="bar"><div id="noiseBar" class="fill noise"></div></div>
+    <audio id="music" src="bmusic.mp3"></audio>
 
-    <button onclick="smallAction()">Do a small action</button>
-    <button onclick="consume()">Escape into phone/music</button>
-    <button onclick="wait()">Wait</button>
-
-    <div class="log" id="log"></div>
-</div>
-
-<script>
-let energy = 60;
-let noise = 40;
-
-const energyBar = document.getElementById("energyBar");
-const noiseBar = document.getElementById("noiseBar");
-const log = document.getElementById("log");
-
-function update() {
-    energy = Math.max(0, Math.min(100, energy));
-    noise = Math.max(0, Math.min(100, noise));
-
-    energyBar.style.width = energy + "%";
-    noiseBar.style.width = noise + "%";
-}
-
-function write(text) {
-    log.innerHTML += text + "<br>";
-    log.scrollTop = log.scrollHeight;
-}
-
-function smallAction() {
-    energy += 8;
-    noise -= 6;
-    write("You did something small. It mattered.");
-    update();
-}
-
-function consume() {
-    energy -= 4;
-    noise -= 2;
-    write("You escaped for a moment. Relief fades fast.");
-    update();
-}
-
-function wait() {
-    energy -= 6;
-    noise += 6;
-    write("You waited. Nothing changed.");
-    update();
-}
-
-setInterval(() => {
-    energy -= 1;
-    noise += 1;
-    update();
-}, 3000);
-
-update();
-</script>
-
+    <script src="script.js"></script>
 </body>
 </html>
